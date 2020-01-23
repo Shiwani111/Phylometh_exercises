@@ -40,6 +40,7 @@ formica.studies.ids <- unlist(formica.studies$study_ids)
     names(return.list) <- c("tol.tree", "study1.tree")
     return(return.list)
 ```
+#To check if the species are the correct ones
 ```{r}
 accessions<-c("JK990833", "JK990832","JK990831","JK990830","JK990829","JK990827")
 seqs <- ape::read.GenBank(accessions)
