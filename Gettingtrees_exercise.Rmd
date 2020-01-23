@@ -1,0 +1,48 @@
+title: "Gettingtrees"
+author: "Shiwani"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:html_document: default
+---
+```{r}
+# Get tree from open tree of life and estimate phylogeny
+GetTreeFromOpenTree <- function() {
+    library(rotl)
+    library(ape)
+formica.id <- tnrs_match_names(name=c("rosa"))$ott_id
+formica.tree <- tol_subtree(ott_id=formica.id)
+plot.phylo(formica.tree, type="fan", cex=0.2)
+}
+
+GetTreeFromOpenTree()
+print(paste("The rosa plant has ", Ntip(formica.tree), " terminals and ",
+Nnode(formica.tree), " internal nodes out of ",Ntip(formica.tree)-2,
+" possible, which means it is ",
+round(100*(Nnode(formica.tree)-1)/(Ntip(formica.tree)-3), 2),
+"% resolved", sep=""))
+
+# Open Tree can also return the original studies with the source trees
+formica.studies <- studies_find_studies(property="ot:focalCladeOTTTaxonName",
+value="Rosa")
+formica.studies.ids <- unlist(formica.studies$study_ids)
+
+    # Let's get info on the first study
+    formica.study1.metadata <- get_study_meta(formica.studies[[1]][[1]])
+    print(get_publication(formica.study1.metadata))
+
+    # And let's get the tree from this study
+    formica.study1.tree1 <- get_study_meta(formica.studies.ids[[1]])
+
+    # And plot it
+    plot.phylo(formica.study1.tree1, type="fan", cex=0.2)
+
+    #Return both trees
+    return.list <- list(formica.tree, formica.study1.tree1)
+    names(return.list) <- c("tol.tree", "study1.tree")
+    return(return.list)
+```
+```{r}
+accessions<-c("JK990833", "JK990832","JK990831","JK990830","JK990829","JK990827")
+seqs <- ape::read.GenBank(accessions)
+attr(seqs, "species")
+class(seqs)
+```
