@@ -18,9 +18,8 @@ plot(density(rnorm(1000)))
 
 Experience with coding.
 ```{r}
-{
+library (ape)
   GetHowManyTrees <- rtree (n=10, rooted=TRUE, tip.label = NULL)
   plot(GetHowManyTrees)
-  }
   
 ```
