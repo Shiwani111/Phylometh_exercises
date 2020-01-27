@@ -46,3 +46,4 @@ accessions<-c("JK990833", "JK990832","JK990831","JK990830","JK990829","JK990827"
 seqs <- ape::read.GenBank(accessions)
 attr(seqs, "species")
 class(seqs)
+```
