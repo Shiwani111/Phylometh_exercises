@@ -1,0 +1,66 @@
+<itsabeastystatewerein version='2.0' sample='50000000'>
+<statenode id='Tree.t:bearsTree'>(((((((((((0:0.0,1:0.7983921228546045)31:0.5193431842719018,2:7.205093868840628)33:1.0195012149095355,8:0.0)36:4.092974175118345,6:3.583218220194949)34:0.08486201573223617,(7:4.086409369176141,9:0.0)32:1.191005238268838)35:1.2943008290757305,((3:2.5031441104155148,12:4.439019076271544)29:6.527306830405697,((5:3.9577968098272143,(10:0.43272718270629396,16:0.43272718270629396)28:3.5250696271209203)26:1.3283645967185533,((15:0.0,((17:0.04633063069821536,19:0.0)24:0.6131445617700857,18:0.6594751924683011)23:1.1783751363534285)27:0.20428572618079088,20:2.0421360550025205)22:3.244025351543247)25:5.680164500131474)37:2.7304061969992333)30:0.3117908894185373,4:0.0)41:1.512828560983941,14:0.0)39:0.5397833010783959,13:0.0)38:8.914268509734665,21:3.176924358316409)42:11.611835784933486,11:0.0)40:0.0</statenode>
+<statenode id='mutationRate.s:bears_cytb_fossils'>mutationRate.s:bears_cytb_fossils[1 1] (0.0,Infinity): 0.4719917255605601 </statenode>
+<statenode id='rateAC.s:bears_cytb_fossils'>rateAC.s:bears_cytb_fossils[1 1] (0.0,Infinity): 0.09010036404010101 </statenode>
+<statenode id='rateAG.s:bears_cytb_fossils'>rateAG.s:bears_cytb_fossils[1 1] (0.0,Infinity): 0.5456938520654566 </statenode>
+<statenode id='rateAT.s:bears_cytb_fossils'>rateAT.s:bears_cytb_fossils[1 1] (0.0,Infinity): 0.2614898735405363 </statenode>
+<statenode id='rateCG.s:bears_cytb_fossils'>rateCG.s:bears_cytb_fossils[1 1] (0.0,Infinity): 0.4450662007090394 </statenode>
+<statenode id='rateGT.s:bears_cytb_fossils'>rateGT.s:bears_cytb_fossils[1 1] (0.0,Infinity): 0.15506483517179073 </statenode>
+<statenode id='kappa.s:bears_irbp_fossils'>kappa.s:bears_irbp_fossils[1 1] (0.0,Infinity): 20.708679111411282 </statenode>
+<statenode id='mutationRate.s:bears_irbp_fossils'>mutationRate.s:bears_irbp_fossils[1 1] (0.0,Infinity): 1.4121844453079258 </statenode>
+<statenode id='gammaShape.s:bears_irbp_fossils'>gammaShape.s:bears_irbp_fossils[1 1] (0.001,1000.0): 0.9713763137428938 </statenode>
+<statenode id='ucldMean.c:bearsClock'>ucldMean.c:bearsClock[1 1] (-Infinity,Infinity): 6.407587279098219 </statenode>
+<statenode id='ucldStdev.c:bearsClock'>ucldStdev.c:bearsClock[1 1] (0.0,Infinity): 0.03873275726255098 </statenode>
+<statenode id='rateCategories.c:bearsClock'>rateCategories.c:bearsClock[42 1] (0,41): 27 4 27 15 25 14 14 3 33 41 26 37 23 28 7 3 34 7 17 38 13 5 26 14 0 17 3 30 40 18 5 18 15 40 12 10 13 19 29 38 28 25 </statenode>
+<statenode id='diversificationRateFBD.t:bearsTree'>diversificationRateFBD.t:bearsTree[1 1] (0.0,Infinity): 0.11212383420734491 </statenode>
+<statenode id='turnoverFBD.t:bearsTree'>turnoverFBD.t:bearsTree[1 1] (0.0,1.0): 0.5172130552419337 </statenode>
+<statenode id='samplingProportionFBD.t:bearsTree'>samplingProportionFBD.t:bearsTree[1 1] (0.0,1.0): 0.456599941379747 </statenode>
+<statenode id='originFBD.t:bearsTree'>originFBD.t:bearsTree[1 1] (0.0,Infinity): 39.372863334113205 </statenode>
+<statenode id='freqParameter.s:bears_cytb_fossils'>freqParameter.s:bears_cytb_fossils[4 1] (0.0,1.0): 0.6290753489378369 0.010491281243963743 0.16356226496980436 0.19687110484839226 </statenode>
+<statenode id='freqParameter.s:bears_irbp_fossils'>freqParameter.s:bears_irbp_fossils[4 1] (0.0,1.0): 0.38433387935629537 0.27437878508297747 0.03992098800358354 0.3013663475571423 </statenode>
+</itsabeastystatewerein>
+<!--
+{"operators":[
+{"id":"FixMeanMutationRatesOperator","p":140.04460538490713,"accept":7686,"reject":654261,"acceptFC":7339,"rejectFC":654178,"rejectIv":654261,"rejectOp":654261},
+{"id":"RateACScaler.s:bears_cytb_fossils","p":0.14638371939514863,"accept":8683,"reject":24617,"acceptFC":8666,"rejectFC":24607,"rejectIv":0,"rejectOp":0},
+{"id":"RateAGScaler.s:bears_cytb_fossils","p":0.15147533047755374,"accept":8868,"reject":24018,"acceptFC":8853,"rejectFC":24012,"rejectIv":0,"rejectOp":0},
+{"id":"RateATScaler.s:bears_cytb_fossils","p":0.16499229103462887,"accept":10010,"reject":22761,"acceptFC":10002,"rejectFC":22753,"rejectIv":0,"rejectOp":0},
+{"id":"RateCGScaler.s:bears_cytb_fossils","p":0.14802951585223922,"accept":8760,"reject":24419,"acceptFC":8748,"rejectFC":24413,"rejectIv":0,"rejectOp":0},
+{"id":"RateGTScaler.s:bears_cytb_fossils","p":0.16812691657215081,"accept":10216,"reject":22964,"acceptFC":10198,"rejectFC":22954,"rejectIv":0,"rejectOp":0},
+{"id":"KappaScaler.s:bears_irbp_fossils","p":0.15568718476461735,"accept":9320,"reject":24242,"acceptFC":9305,"rejectFC":24234,"rejectIv":0,"rejectOp":0},
+{"id":"gammaShapeScaler.s:bears_irbp_fossils","p":0.17042434346312077,"accept":10095,"reject":23136,"acceptFC":10076,"rejectFC":23126,"rejectIv":8,"rejectOp":8},
+{"id":"ucldMeanScaler.c:bearsClock","p":0.1541543879214437,"accept":91312,"reject":240689,"acceptFC":91181,"rejectFC":240607,"rejectIv":0,"rejectOp":0},
+{"id":"ucldStdevScaler.c:bearsClock","p":0.14768083217490768,"accept":261435,"reject":732697,"acceptFC":260983,"rejectFC":732494,"rejectIv":0,"rejectOp":0},
+{"id":"CategoriesRandomWalk.c:bearsClock","p":"NaN","accept":2156980,"reject":1158219,"acceptFC":2155583,"rejectFC":1157474,"rejectIv":1158219,"rejectOp":1158219},
+{"id":"CategoriesSwapOperator.c:bearsClock","p":"NaN","accept":3313388,"reject":0,"acceptFC":3311201,"rejectFC":0,"rejectIv":0,"rejectOp":0},
+{"id":"CategoriesUniform.c:bearsClock","p":"NaN","accept":3316203,"reject":0,"acceptFC":3314201,"rejectFC":0,"rejectIv":0,"rejectOp":0},
+{"id":"relaxedUpDownOperator.c:bearsClock","p":0.019721559447207066,"accept":2400,"reject":990212,"acceptFC":2323,"rejectFC":989669,"rejectIv":989089,"rejectOp":988541},
+{"id":"originScalerFBD.t:bearsTree","p":0.7737395340753729,"accept":233901,"reject":760757,"acceptFC":233778,"rejectFC":760231,"rejectIv":302769,"rejectOp":0},
+{"id":"divRateScalerFBD.t:bearsTree","p":0.34440043906531526,"accept":801150,"reject":2509500,"acceptFC":799660,"rejectFC":2508877,"rejectIv":0,"rejectOp":0},
+{"id":"turnoverScalerFBD.t:bearsTree","p":0.19510448722198484,"accept":221334,"reject":3093107,"acceptFC":220285,"rejectFC":3092030,"rejectIv":2065588,"rejectOp":2056216},
+{"id":"samplingPScalerFBD.t:bearsTree","p":0.16050237043575527,"accept":305342,"reject":3006795,"acceptFC":304215,"rejectFC":3005740,"rejectIv":1956791,"rejectOp":1951808},
+{"id":"LeafToSAFBD.t:bearsTree","p":"NaN","accept":424909,"reject":2890054,"acceptFC":424689,"rejectFC":2888106,"rejectIv":1568559,"rejectOp":1561573},
+{"id":"SAWilsonBaldingFBD.t:bearsTree","p":"NaN","accept":318186,"reject":2999247,"acceptFC":318006,"rejectFC":2997301,"rejectIv":2270495,"rejectOp":23377},
+{"id":"SAWideFBD.t:bearsTree","p":"NaN","accept":140129,"reject":3173083,"acceptFC":140052,"rejectFC":3171098,"rejectIv":3173083,"rejectOp":2761893},
+{"id":"SANarrowFBD.t:bearsTree","p":"NaN","accept":910236,"reject":2402425,"acceptFC":909663,"rejectFC":2400829,"rejectIv":2402425,"rejectOp":1934539},
+{"id":"SAUniformOperatorFBD.t:bearsTree","p":"NaN","accept":5290315,"reject":1334515,"acceptFC":5286938,"rejectFC":1333700,"rejectIv":0,"rejectOp":0},
+{"id":"SATreeRootScalerFBD.t:bearsTree","p":0.3002396305567345,"accept":3110,"reject":328513,"acceptFC":3094,"rejectFC":328339,"rejectIv":327250,"rejectOp":272925},
+{"id":"SATreeScalerFBD.t:bearsTree","p":0.09805015577918717,"accept":10341,"reject":984830,"acceptFC":9994,"rejectFC":984560,"rejectIv":976964,"rejectOp":965906},
+{"id":"tipDatesSampler.?Agriarctos_spp","p":1,"accept":232929,"reject":99006,"acceptFC":232783,"rejectFC":98912,"rejectIv":89056,"rejectOp":42383},
+{"id":"tipDatesSampler.?Ailurarctos_lufengensis","p":1,"accept":217639,"reject":112387,"acceptFC":217526,"rejectFC":112303,"rejectIv":104895,"rejectOp":55203},
+{"id":"tipDatesSampler.?Arctodus_simus","p":1,"accept":258094,"reject":72406,"acceptFC":257946,"rejectFC":72351,"rejectIv":66683,"rejectOp":33016},
+{"id":"tipDatesSampler.Ballusia_elmensis","p":1,"accept":217440,"reject":113396,"acceptFC":217296,"rejectFC":113323,"rejectIv":105579,"rejectOp":51998},
+{"id":"tipDatesSampler.Indarctos_arctoides","p":1,"accept":147744,"reject":182825,"acceptFC":147642,"rejectFC":182726,"rejectIv":181092,"rejectOp":54224},
+{"id":"tipDatesSampler.Indarctos_punjabiensis","p":1,"accept":232235,"reject":98838,"acceptFC":232095,"rejectFC":98758,"rejectIv":90705,"rejectOp":64673},
+{"id":"tipDatesSampler.Indarctos_vireti","p":1,"accept":141128,"reject":190003,"acceptFC":141038,"rejectFC":189890,"rejectIv":187815,"rejectOp":59391},
+{"id":"tipDatesSampler.?Kretzoiarctos_beatrix","p":1,"accept":91075,"reject":240471,"acceptFC":91022,"rejectFC":240333,"rejectIv":240109,"rejectOp":58436},
+{"id":"tipDatesSampler.Parictis_montanus","p":1,"accept":272055,"reject":59241,"acceptFC":271866,"rejectFC":59217,"rejectIv":55526,"rejectOp":7840},
+{"id":"tipDatesSampler.?Ursavus_brevihinus","p":1,"accept":146210,"reject":184967,"acceptFC":146120,"rejectFC":184856,"rejectIv":183145,"rejectOp":33149},
+{"id":"tipDatesSampler.?Ursavus_primaevus","p":1,"accept":217434,"reject":113606,"acceptFC":217306,"rejectFC":113531,"rejectIv":105707,"rejectOp":51637},
+{"id":"tipDatesSampler.Ursus_?abstrusus","p":1,"accept":230102,"reject":100706,"acceptFC":229937,"rejectFC":100651,"rejectIv":97429,"rejectOp":59103},
+{"id":"tipDatesSampler.Ursus_?spelaeus","p":1,"accept":35185,"reject":296497,"acceptFC":35163,"rejectFC":296310,"rejectIv":296416,"rejectOp":199976},
+{"id":"tipDatesSampler.?Zaragocyon_daamsi","p":1,"accept":255425,"reject":75902,"acceptFC":255269,"rejectFC":75848,"rejectIv":71347,"rejectOp":15974},
+{"id":"FrequenciesExchanger.s:bears_cytb_fossils","p":3.1853882093914088,"accept":4311,"reject":28444,"acceptFC":4293,"rejectFC":28444,"rejectIv":28444,"rejectOp":28444},
+{"id":"FrequenciesExchanger.s:bears_irbp_fossils","p":3.3923285963457195,"accept":4147,"reject":28783,"acceptFC":4120,"rejectFC":28783,"rejectIv":28783,"rejectOp":28783}
+]}
+-->
