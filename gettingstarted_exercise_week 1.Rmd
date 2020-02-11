@@ -1,0 +1,36 @@
+---
+title: "Gettingstarted"
+author: "Shiwani"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:html_document: default
+---
+  
+Make this line bold
+Make this line **bold**
+
+Make the word italic italicized
+Make the word *italic* italicized
+
+Make the plot in the document
+```{r}
+plot(density(rnorm(1000)))
+```
+
+Practice on getting trees
+```{r}
+library(ape)
+get.trees<-
+    "((((((orange, lime),mandarin),(blueberry,(guava,apple))),(mango,starfruit)),litchi),grapes);"
+tree<-read.tree(text=get.trees)
+plot(tree,no.margin=TRUE,edge.width=2)
+```
+
+```{r}
+library(phytools)
+roundPhylogram(tree)
+```
+```{r}
+plot(unroot(tree),type="unrooted",no.margin=TRUE,lab4ut="axial",
+    edge.width=2)
+```
+    
