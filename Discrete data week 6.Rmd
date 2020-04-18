@@ -1,0 +1,64 @@
+install.packages("corHMM", repos="https://R-Forge.R-project.org")
+install.packages("phangorn", repos="https://cran.r-project.org")
+library("geiger")
+library("devtools")
+library("ape")
+library("phytools")
+library("corHMM")
+library("phangorn")
+
+# Getting data into R
+mydata<-read.csv("C:/Users/ssapkot1/Desktop/elopomorph.csv", row.names=1, stringAsFactors=FALSE)
+mydata
+mytree<-ape::read.tree("C:/Users/ssapkot1/Desktop/elopomorph.txt")
+plot(mytree)
+mytree
+
+# Visualizing the data
+library(phytools)
+VisualizeData <- function(phy, data) {
+  plotTree(mytree, mydata, length=10)
+}
+VisualizeData()
+
+# Cleaning the data
+CleanData<-function(phy,data){
+mytreeclean<-geiger::treedata(phy=phy,data=data, sort=TRUE)
+return(mytreeclean)
+}
+mycleandata<-CleanData(mytree, mydata)
+
+# Looking at ancestral states using parsimony
+cleaned.discrete.phyDat <- phangorn::phyDat(mycleandata, type="USER", levels=c("0", "1")) #phyDat is a data format used by phangorn
+anc.p <- phangorn::ancestral.pars(mycleandata$phy, cleaned.discrete.phyDat)
+plotAnc(mycleandata$phy, anc.p, 1)
+
+# Plotting likelihood estimates
+anc.ml <- ancestral.pml(pml(mycleandata$phy, cleaned.discrete.phyDat), type="ml")
+plotAnc(mycleandata$phy, anc.ml, 1)
+
+#How does this differ from parsimony? Why does it differ from parsimony?
+Parsimony estimates the ancestral states on the basis of least possible amount of changes while Maximum likelihood gets the ancestral state maximizing likehood of data on phylogenetic tree and there is greater uncertainty in estimates. 
+
+#What does uncertainty mean?
+Uncertainty of a character state on a given specific node.
+
+# How can you estimate transition rates between states? Do it.How could you examine if transition rates are equal?
+
+Here we consider a model where backward and forward rates between states are permitted to get different values.
+fitARD<-ace(mydata,mytree,model="ARD",type="discrete")
+fitARD
+fitARD$lik.anc
+
+#Think about the Lewis (2001) MKV model. Are your traits all variable? Will using this make sense for your data? Try using it. Do results change?
+As the traits are variable, it leads to acquisition bias making overestimation in branch lengths. MKV model can be used accounting for the biasness.
+
+Mkv<-lewisMkv(phy=mycleandata$phy, data=mycleandata$data, include.gamma=TRUE)
+Mkv
+plot(mkv$phy)
+plotAnc(mycleandata$phy, anc.p)
+
+The branch lengths vary.
+
+#How could you test order of state evolution?
+Since there are only two character states i.e. 0 and 1, it may not be possible to test the order.However, we might look for root character to check the which character state came first. Checking the order would be easier for the ones with more than two character states. 
