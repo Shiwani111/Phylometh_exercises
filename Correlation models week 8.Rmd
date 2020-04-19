@@ -1,0 +1,118 @@
+library(geiger)
+library(ape)
+library(corHMM)
+library(phytools)
+
+# Continuous data
+tree.primates <- read.tree(text="((((Homo:0.21,Pongo:0.21):0.28,Macaca:0.49):0.13,Ateles:0.62):0.38,Galago:1.00);") #using examples from ape ?pic
+X <- c(4.09434, 3.61092, 2.37024, 2.02815, -1.46968)
+Y <- c(4.74493, 3.33220, 3.36730, 2.89037, 2.30259)
+names(X) <- names(Y) <- c("Homo", "Pongo", "Macaca", "Ateles", "Galago")
+pic.X <- pic(X, tree.primates)
+pic.Y <- pic(Y, tree.primates)
+
+# Discrete data 
+data(primates)
+ls()
+print(primates)
+
+# Review of discrete state models
+primates$trait[which(grepl("Hylobates",primates$trait[,1])),2]<-1
+trait1<-primates$trait[,2]
+names(trait1)<-primates$trait[,1]
+primates$tree <- ape::multi2di(primates$tree)
+plotSimmap(make.simmap(primates$tree, trait1), pts=FALSE, fsize=0.8)
+rate.mat.er<-rate.mat.maker(rate.cat=1, hrm=FALSE, ntraits=1, nstates=2, model="ER")
+print(rate.mat.er)
+
+# What does this matrix mean?
+# There is equal rate of change between state 1 to state 2 and state 2 to state 1.
+
+pp.er<-corHMM(primates$tree,primates$trait[,c(1,2)],rate.cat=1,rate.mat=rate.mat.er,node.states="marginal")
+print(pp.er)
+
+# What do these results mean?
+# lnL: Maximum log-likelihood for the model
+# AIC: Akaike Information Criterion used for selecting a model from a set of models. The best model has delta AIC of 0. 
+# AICc: Accounts the sample size.
+# Rate.cat: Initial number of rate categories specified while running the model.
+# ntax: Taxa number in the model.
+
+rate.mat.ard<-rate.mat.maker(rate.cat=1, hrm=FALSE, ntraits=1, nstates=2, model="ARD")
+print(rate.mat.ard)
+
+# And these?
+# The rate parameter for state 1 to state 2 is double of the rate parameter for state 2 to state 1. 
+
+pp.ard<-corHMM(primates$tree,primates$trait[,c(1,2)],rate.cat=1,rate.mat=rate.mat.ard,node.states="marginal")
+print(pp.ard)
+
+# which model is better?
+# The model with equal rate is better.
+
+# A matrix with four states
+rate.mat.er.4state<-rate.mat.maker(rate.cat=1, hrm=FALSE, ntraits=1, nstates=4, model="ER")
+print(rate.mat.er.4state)
+
+# Conversion of two binary traits into a single four character state
+fourstate.trait<-rep(NA,Ntip(primates$tree))
+for(i in sequence(Ntip(primates$tree))) {
+  if(primates$trait[i,2]==0 && primates$trait[i,3]==0) {
+    fourstate.trait[i]<-0
+  }
+  if(primates$trait[i,2]==0 && primates$trait[i,3]==1) {
+    fourstate.trait[i]<-1
+  }
+  if(primates$trait[i,2]==1 && primates$trait[i,3]==0) {
+    fourstate.trait[i]<-2
+  }
+  if(primates$trait[i,2]==1 && primates$trait[i,3]==1) {
+    fourstate.trait[i]<-3
+  }
+}
+fourstate.data<-data.frame(Genus_sp=primates$trait[,1], T1=fourstate.trait)
+print(rayDISC(primates$tree, fourstate.data, ntraits=1, model="ER", node.states="marginal"))
+print(rayDISC(primates$tree, fourstate.data, ntraits=1, rate.mat=rate.mat.er.4state, node.states="marginal", model="ARD"))
+rate.mat.ard.4state<-rate.mat.maker(rate.cat=1, hrm=FALSE, ntraits=1, nstates=4, model="ARD")
+print(rate.mat.ard.4state)
+
+# Equivalent of a GTR matrix
+rate.mat.gtr.4state<-rate.mat.ard.4state
+rate.mat.gtr.4state<-rate.par.eq(rate.mat.gtr.4state, c(1,4))
+rate.mat.gtr.4state<-rate.par.eq(rate.mat.gtr.4state, c(2,6))
+rate.mat.gtr.4state<-rate.par.eq(rate.mat.gtr.4state, c(3,8))
+rate.mat.gtr.4state<-rate.par.eq(rate.mat.gtr.4state, c(4,6))
+rate.mat.gtr.4state<-rate.par.eq(rate.mat.gtr.4state, c(5,7))
+rate.mat.gtr.4state<-rate.par.eq(rate.mat.gtr.4state, c(6,7))
+print(rate.mat.gtr.4state)
+print(rayDISC(primates$tree, fourstate.data, ntraits=1, rate.mat= rate.mat.gtr.4state, node.states="marginal", model="ARD"))
+
+# Model like Pagel 1994
+print(rate.mat.maker(rate.cat=1, hrm=FALSE, ntraits=2, nstates=2, model="ARD"))
+rate.mat.pag94<-rate.par.drop(rate.mat.ard.4state, drop.par=c(3,5,8,10))
+print
+
+# Route 1
+#Consider the transtions rates for state 1 (0,0) to state 2 (0,1) and state 3 (1,0) to NA.  
+rate.mat.pag94.fixedstate<-rate.mat.pag94
+rate.mat.pag94.fixedstate[1,2]<-NA
+rate.mat.pag94.fixedstate[1,3]<-NA
+rate.mat.pag94.fixedstate
+print(rayDISC(primates$tree, fourstate.data, ntraits=1, rate.mat= rate.mat.pag94.fixedstate, node.states="marginal", model="ARD"))
+
+# AIC for fixed state 1 is higher then the transitioning state 1 model.So, it is not the best model. 
+
+# Experiment with the effects of frequencies at the root.
+print(rayDISC(primates$tree, fourstate.data, ntraits=1, rate.mat= rate.mat.pag94.fixedstate, node.states="marginal", model="ARD", root.p="yang"))
+print(rayDISC(primates$tree, fourstate.data, ntraits=1, rate.mat= rate.mat.pag94.fixedstate, node.states="marginal", model="ARD", root.p="maddfitz"))
+
+# AIC for maddfitz model is 106.2 while AIC for Yang model is 111.5.
+
+# Create and use a model to see if transitions from 00 go to 11 only via 01.
+# Consider transtions rates for state 3 (1, 0) to state 4 (1, 1) to NA. Transition from state 1(0,0) can go to state 4 (1, 1) only via state 2 (0, 1).
+rate.mat.pag94.fixedstate1<-rate.mat.pag94
+rate.mat.pag94.fixedstate1[3,4]<-NA
+rate.mat.pag94.fixedstate1
+print(rayDISC(primates$tree, fourstate.data, ntraits=1, rate.mat= rate.mat.pag94.fixedstate1, node.states="marginal", model="ARD"))
+
+#AIC for the given model is 102.9 which is higher than the model where transition to state 11 is allowed via other states. 
