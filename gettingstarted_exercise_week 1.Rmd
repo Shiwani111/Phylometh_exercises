@@ -33,4 +33,10 @@ roundPhylogram(tree)
 plot(unroot(tree),type="unrooted",no.margin=TRUE,lab4ut="axial",
     edge.width=2)
 ```
-    
+```{r}
+GetHowManyTrees <- function(ntaxa=20) {
+    resulttrees <- ape::howmanytrees(ntaxa)
+    return(resulttrees)
+}
+GetHowManyTrees()
+```   
