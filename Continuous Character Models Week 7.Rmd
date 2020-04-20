@@ -1,11 +1,11 @@
 install.packages("yearn")
-install.packages("https://www.rdocumentation.org/packages/yearn")
 library(ape)
 library(rotl)
 library(phytools)
 library(geiger) 
 library(OUwie)
 library(corHMM)
+library(yearn)
 
 # Getting data
 anole_tree<-read.tree("http://www.phytools.org/eqg2015/data/anole.tre")
